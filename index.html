@@ -3,76 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arzen | Premium Birthday</title>
+<title>İyi ki doğdun ❤️</title>
 
 <style>
 body{
     margin:0;
     font-family:Arial;
-    background:linear-gradient(135deg,#0f0f0f,#2c2c2c);
     color:white;
+    overflow-x:hidden;
+    background: linear-gradient(-45deg,#ff4d6d,#ffb703,#7209b7,#ff758f);
+    background-size:400% 400%;
+    animation:bg 10s ease infinite;
+}
+
+@keyframes bg{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
 
 .container{
-    max-width:900px;
-    margin:auto;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
     padding:20px;
 }
 
-.header{
-    text-align:center;
-    padding:30px 10px;
-}
-
-.header h1{
-    font-size:45px;
-    letter-spacing:2px;
-}
-
-.header p{
-    opacity:0.7;
-}
-
 .card{
-    background:rgba(255,255,255,0.08);
-    border:1px solid rgba(255,255,255,0.2);
-    border-radius:20px;
-    padding:25px;
-    margin-top:20px;
-    backdrop-filter:blur(10px);
-}
-
-input, textarea{
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.25);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    padding:30px;
+    max-width:700px;
     width:100%;
-    padding:12px;
-    margin-top:10px;
-    border-radius:10px;
-    border:none;
-    outline:none;
+    position:relative;
 }
 
-button{
-    margin-top:15px;
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:30px;
-    background:linear-gradient(135deg,#ff4d6d,#ffb703);
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
+h1{
+    font-size:42px;
+    margin-bottom:10px;
 }
 
-.output{
-    display:none;
-    margin-top:25px;
+p{
+    opacity:0.9;
 }
 
+/* GALLERY */
 .gallery{
+    margin-top:20px;
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:10px;
-    margin-top:15px;
 }
 
 .gallery img{
@@ -81,6 +65,69 @@ button{
     object-fit:cover;
     border-radius:15px;
 }
+
+/* BUTTON */
+button{
+    margin-top:15px;
+    padding:12px 20px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* LETTER */
+.letter-box{
+    margin-top:20px;
+    perspective:1000px;
+}
+
+.letter{
+    width:100%;
+    height:140px;
+    position:relative;
+    transform-style:preserve-3d;
+    transition:0.8s;
+    cursor:pointer;
+}
+
+.letter.open{
+    transform:rotateY(180deg);
+}
+
+.face{
+    position:absolute;
+    width:100%;
+    height:100%;
+    backface-visibility:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:15px;
+    background:rgba(255,255,255,0.15);
+    border:1px solid rgba(255,255,255,0.3);
+}
+
+.back{
+    transform:rotateY(180deg);
+    font-size:14px;
+    padding:10px;
+}
+
+/* HEARTS */
+.heart{
+    position:fixed;
+    top:-10px;
+    font-size:18px;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+}
 </style>
 </head>
 
@@ -88,68 +135,64 @@ button{
 
 <div class="container">
 
-<div class="header">
-    <h1>ARZEN</h1>
-    <p>Premium Birthday Experience Builder</p>
-</div>
-
 <div class="card">
 
-    <input id="name" placeholder="İsim">
-    <textarea id="msg" placeholder="Mesaj"></textarea>
-    <input type="date" id="date">
+<h1>İyi ki doğdun Arzen ❤️</h1>
 
-    <input id="i1" placeholder="Foto 1 URL">
-    <input id="i2" placeholder="Foto 2 URL">
-    <input id="i3" placeholder="Foto 3 URL">
-    <input id="i4" placeholder="Foto 4 URL">
+<p>Bu sana özel hazırlanmış bir doğum günü hediyesi</p>
 
-    <button onclick="create()">Oluştur</button>
+<p id="counter"></p>
 
+<div class="gallery">
+    <img src="https://picsum.photos/400?1">
+    <img src="https://picsum.photos/400?2">
+    <img src="https://picsum.photos/400?3">
+    <img src="https://picsum.photos/400?4">
 </div>
 
-<div class="output" id="out">
-
-    <div class="card">
-        <h2 id="oName"></h2>
-        <p id="oMsg"></p>
-        <div id="days"></div>
-
-        <div class="gallery">
-            <img id="g1">
-            <img id="g2">
-            <img id="g3">
-            <img id="g4">
+<div class="letter-box">
+    <div class="letter" onclick="toggleLetter()">
+        <div class="face front">💌 Mektubu Aç</div>
+        <div class="face back">
+            Seni mutlu etmek için bu küçük sayfayı hazırladım.<br><br>
+            İyi ki varsın ❤️<br>
+            Her şey seninle güzel.
         </div>
     </div>
+</div>
+
+<button onclick="alert('İyi ki doğdun ❤️')">Mesaj</button>
 
 </div>
 
 </div>
 
 <script>
-function create(){
-    document.getElementById("out").style.display="block";
 
-    document.getElementById("oName").innerText =
-    "İyi ki doğdun " + document.getElementById("name").value;
+// sayaç
+let start = new Date("2024-01-01");
+let now = new Date();
+let diff = now - start;
+let days = Math.floor(diff/(1000*60*60*24));
 
-    document.getElementById("oMsg").innerText =
-    document.getElementById("msg").value;
+document.getElementById("counter").innerText =
+"Birlikte geçen özel gün: " + days + " gün";
 
-    let d = new Date(document.getElementById("date").value);
-    let now = new Date();
-    let diff = now - d;
-    let days = Math.floor(diff/(1000*60*60*24));
-
-    document.getElementById("days").innerText =
-    "Aradan geçen süre: " + days + " gün";
-
-    document.getElementById("g1").src=document.getElementById("i1").value;
-    document.getElementById("g2").src=document.getElementById("i2").value;
-    document.getElementById("g3").src=document.getElementById("i3").value;
-    document.getElementById("g4").src=document.getElementById("i4").value;
+// mektup
+function toggleLetter(){
+    document.querySelector(".letter").classList.toggle("open");
 }
+
+// kalpler
+for(let i=0;i<30;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=(Math.random()*3+2)+"s";
+    document.body.appendChild(h);
+}
+
 </script>
 
 </body>
